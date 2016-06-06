@@ -19,11 +19,29 @@ angular.module('commentForm', [])
         scope.comment = {};
         scope.submitComment = function(){
           var comment = scope.comment;
+          comment.timestamp = getTimestamp();
           if (!comment.msg || !comment.author) {
             return;
           }
           scope.$emit('submitted', comment);
           scope.comment = {};
+        }
+
+        Number.prototype.padLeft = function(base,chr){
+          var  len = (String(base || 10).length - String(this).length)+1;
+          return len > 0? new Array(len).join(chr || '0')+this : this;
+        }
+
+        function getTimestamp(){
+          var timestamp = new Date,
+          timestampformat = [(timestamp.getMonth()+1).padLeft(),
+                timestamp.getDate().padLeft(),
+                timestamp.getFullYear()].join('/') +' ' +
+                [timestamp.getHours().padLeft(),
+                timestamp.getMinutes().padLeft(),
+                timestamp.getSeconds().padLeft()].join(':');
+
+          return timestampformat;
         }
       }
     };

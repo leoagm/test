@@ -11,7 +11,8 @@ angular.module('commentList', ['comment'])
     return {
       template: '<div class="commentList">' +
                   '<comment-model ng-repeat="comment in comments" author="{{comment.author}}">' +
-                    '{{comment.msg}}' +
+                    '{{comment.msg}} - ' +
+                    '<span am-time-ago="comment.timestamp"></span>'+
                   '</comment-model>' +
                   '<span ng-if="comments.length < 1">No comments yet</span>' +
                 '</div>',
@@ -19,6 +20,7 @@ angular.module('commentList', ['comment'])
       scope: {
         comments: '='
       },
-      link: function postLink(scope, element, attrs) {}
+      link: function postLink(scope, element, attrs) {
+      }
     };
   });
